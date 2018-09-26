@@ -19,8 +19,7 @@
             #myDiv{
          width: 96%;
         height: 700px;
-      overflow: scroll;
-      overflow-x:hidden;
+      overflow: auto;
             }
             .Logo {
  position: fixed;
@@ -31,14 +30,15 @@
     object-fit: contain;
 }
             #mainborder{
-	position: fixed;
+position: absolute;
     margin: 0;
-    width: 69.5%;
-    left: 219px;
+    top: 0px;
+    width: 66.2%;
+    left: 220px;
     background-color: #f9fafa;
     height: 70px;
     background-color: f9fafa;
-    border: 1px solid rgba(29, 49, 91, .3)
+    border: 1px solid rgba(29, 49, 91, .3);
 			
 			}
             .Active-Group-logo {
@@ -237,6 +237,7 @@ a.logout-btn:hover, a.logout-btn:active, a.logout-btn:focus {
 
 .navbar-fixed-left + .container {
   padding-left: 160px;
+  overflow:hidden;
 }
 
 /* On using dropdown menu (To right shift popuped) */
