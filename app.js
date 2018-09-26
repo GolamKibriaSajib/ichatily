@@ -3,8 +3,6 @@ var path = require("path");
 var mongoose = require('mongoose');
 var app = express();
 var session = require('express-session');
-var flash 		= require('connect-flash');
-
 var bodyParser 	= require('body-parser');
 //...
 	var irc = require("irc");
