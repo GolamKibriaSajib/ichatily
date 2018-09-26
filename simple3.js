@@ -91,7 +91,8 @@ module.exports = function (io, chat) {
 
 		// when the client emits 'sendchat', this listens and executes
 		socket.on('sendchat', function (data) {
-			bot.say(socket.room, data);
+		//	bot.say(socket.room, data);
+		bot.send("PRIVMSG", socket.room,data);
            socket.emit('updatechat', options.userName, data,socket.room)
 			
 		});
