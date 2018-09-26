@@ -1,0 +1,25 @@
+{
+  "name": "chatapp ",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~4.14.0",
+    "passport-http-bearer": "~1.0.1",
+    "path": "~0.12.7",
+    "http-server": "~0.9.0",
+    "ejs": "~2.5.2",
+    "mongoose": "5.2.9",
+    "passport": "~0.3.2",
+    "passport-facebook": "~2.1.1",
+    "socket.io": "~1.4.8",
+    "irc": "0.5.2"
+  }
+}
+
+
+

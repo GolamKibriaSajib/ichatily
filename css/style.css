@@ -1,0 +1,261 @@
+ @media only screen and (max-width : 540px) 
+            {
+                
+                .chat-sidebar
+                {
+                    display: none !important;
+                }
+                
+                .chat-popup
+                {
+                    display: none !important;
+                }
+            }
+            
+            body
+            {
+                background-color: #ffff;
+            }
+            #myDiv{
+         width: 96%;
+        height: 700px;
+      overflow: scroll;
+      overflow-x:hidden;
+            }
+            .Logo {
+ position: fixed;
+    width: 86px;
+    top: 80px;
+    left: 60px;
+    height: 31px;
+    object-fit: contain;
+}
+            #mainborder{
+	position: fixed;
+    margin: 0;
+    width: 69.5%;
+    left: 219px;
+    background-color: #f9fafa;
+    height: 70px;
+    background-color: f9fafa;
+    border: 1px solid rgba(29, 49, 91, .3)
+			
+			}
+            .Active-Group-logo {
+			position: fixed;
+    left: 249px;
+    top:17px;
+    width: 34px;
+    height: 34px;
+  
+			}
+            .controls a {
+  font-family: "Roboto", sans-serif;
+  float: right;
+  text-transform: uppercase;
+  outline: 0;
+  background: #86BB71;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.controls {
+  width: 238px;
+  float: right;
+  margin: 0;
+  text-align: center;
+  border-bottom: 2px solid white;
+}
+.controls a {
+  width: 50%;
+  margin: 0;
+}
+.controls a {
+  text-decoration: none;
+}
+a.logout-btn{
+  background-color: rgb(226, 98, 92);
+}
+a.logout-btn:hover, a.logout-btn:active, a.logout-btn:focus {
+  background-color: rgb(245, 106, 99);
+}
+
+			
+			
+			
+			
+			
+			.right-section-bottom{
+	background: #fff;
+    width: 71%;
+    padding: 5px;
+    position: absolute;
+    left: 224px;
+    bottom: 0px;
+    border-top: 1px solid #E6E6E6;
+    text-align: center;
+}
+.right-section-bottom input{
+	border:0px;
+	padding:8px 5px;
+	width:calc(100% - 150px);
+}
+.right-section-bottom .btn-send{
+	border:0px;
+	padding: 8px 10px;
+	float: right;
+	margin-right: 30px;
+	color: #009EF7;
+	font-size: 18px;
+	background: #fff;
+	cursor: pointer;
+}
+			
+			#msgId{
+			    font-family: inherit;
+				border: 0;
+	margin: 0;
+	padding: 13px;
+    width: 279px;
+    font-size: inherit;
+    line-height: inherit;
+    position: absolute;
+    top: 270px;
+    left: 0px;
+	}
+            
+            .chat-sidebar
+            {
+                width: 238px;
+                position: fixed;
+                height: 100%;
+                right: 0px;
+                top: 49px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border: 1px solid rgba(29, 49, 91, .3);
+            }
+            
+            .sidebar-name 
+            {
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-bottom: 4px;
+                font-size: 12px;
+            }
+            
+            .sidebar-name span
+            {
+                padding-left: 5px;
+            }
+            
+            .sidebar-name a
+            {
+                display: block;
+                height: 100%;
+                text-decoration: none;
+                color: inherit;
+            }
+            
+            .sidebar-name:hover
+            {
+                background-color:#e1e2e5;
+            }
+            
+            .sidebar-name img
+            {
+                width: 32px;
+                height: 32px;
+                vertical-align:middle;
+            }
+            
+            .popup-box
+            {
+                display: none;
+                position: fixed;
+                bottom: 0px;
+                right: 220px;
+                height: 320px;
+                background-color: #fff;
+                width: 280px;
+                border: 1px solid rgba(29, 49, 91, .3);
+            }
+            
+            .popup-box .popup-head
+            {
+                background-color: #293239;
+				border-radius:5px 5px 0 0;
+                padding: 10px 20px;
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                clear: both;
+            }
+            
+            .popup-box .popup-head .popup-head-left
+            {
+                float: left;
+            }
+            
+            .popup-box .popup-head .popup-head-right
+            {
+                float: right;
+                opacity: 0.5;
+            }
+            
+            .popup-box .popup-head .popup-head-right a
+            {
+                text-decoration: none;
+                color: inherit;
+            }
+            
+            .popup-box .popup-messages
+            {
+                height: 100%;
+                overflow-y: scroll;
+            }
+
+            .navbar-inverse {
+    background-color: #212b36;
+    border-color: #080808;
+            }
+			.navbar-fixed-left {
+  width: 220px;
+  position: fixed;
+  border-radius: 0;
+  height: 100%;
+}
+
+.navbar-fixed-left .navbar-nav > li {
+  float: none;  /* Cancel default li float: left */
+  width: 139px;
+}
+
+.navbar-fixed-left + .container {
+  padding-left: 160px;
+}
+
+/* On using dropdown menu (To right shift popuped) */
+
+
+.navbar-nav{
+    position: fixed;
+    margin: 61px;
+    top: 90px;
+    cursor:pointer;
+}
+.footer {
+       position: fixed;
+    left: 140px;
+    bottom: 0;
+    width: 75%;
+    background-color: #607D8B;
+    color: whitesmoke;
+    text-align: center;
+	height:60px;
+}
+            

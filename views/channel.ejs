@@ -1,0 +1,267 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/jquery-3.1.1.min.js"></script>
+<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/mycss.css"/>
+<script>
+	var socket = io("http://localhost:3000");
+    var rooms=['gksajib93','golam','debian'];
+
+   //socket.id="mymodified";
+   // socket = io.connect('http://localhost:3000' ,{
+   // transports: ['websocket'],
+   // secure: true,
+   // 'force new connection' : false,
+ //   'reconnect' : true,
+//});
+    
+     var username,password;
+	// on connection to server, ask for user's name with an anonymous callback
+	socket.on('connect', function(){
+        console.log(socket.id);
+       //  socket.id="mymodified";
+      
+         console.log(socket)
+  
+      //  socket.emit("const",socket.id);
+        
+	console.log("connect");
+		// call the server-side function 'adduser' and send one parameter (value of prompt)
+	
+	});
+
+ socket.emit("every","<%=username%>","<%=password%>");
+ //socket.emit("adduser","<%=username%>");
+
+ socket.on("user",function(username,channel){
+     socket.emit("adduser",username,channel);
+ })
+    
+
+ // socket.on("errormsg",function(msg){
+	//  $("#hello6").append("<div>"+ "<b>" +msg[i].nick+":</b>"+ +"</div>");)
+
+ // })
+  
+
+
+	socket.on("data",function(name,msg){
+		console.log("kk")
+    console.log(name)
+		socket.emit('userchat', name,msg);
+
+	});
+	
+	socket.on("old",function(msg){
+	
+	 for(var i=0;i<msg.length;i++){
+    if(i>msg.length){
+	  break;
+	 }
+	 else{
+	   $('#conversation').append("<div>"+ "<b>" +msg[i].nick+":</b>"+ "<div id='mine'>"+msg[i].msg+ "</div>"+"</br>"+"</div>");
+	 }
+	 }
+	 });
+	
+	socket.on('updatechat', function (username, data,channel) {
+        console.log(data);
+        console.log(channel);
+         
+        if(channel=="#gksajib93"){
+             $(".gksajib93").show();
+          $(".golam,.debdin").hide();
+           $(".gksajib93").append("<div>"+"<b>" +username+":</b>"+ "<div id='mine'>"+data+ "</div>"+"</br>"+"</div>"); 
+        }
+        if(channel=="#golam"){
+             $(".golam").show();
+               $(".gksajib93,.debdin").hide();
+           $('.golam').append("<div>"+"<b>" +username+":</b>"+ "<div id='mine'>"+data+ "</div>"+"</br>"+"</div>"); 
+        }
+
+  //   $('.'+channel).append("<div>"+"<b>" +username+":</b>"+ "<div id='mine'>"+data+ "</div>"+"</br>"+"</div>");
+	});
+
+	// listener, whenever the server emits 'updaterooms', this updates the room the client is in
+	socket.on('updaterooms', function(rooms, current_room) {
+		$('#rooms').empty();
+		$.each(rooms, function(key, value) {
+			if(value == current_room){
+				$('#rooms').append('<div>'+'<img src="/pic.jpeg"/>'+" " + value + '</div>');
+			}
+			else {
+				$('#rooms').append('<div><img src="/pic.jpeg"/><a href="#" onclick="switchRoom(\''+value+'\')">'+" " + value + '</a></div>');
+			}
+		});
+	});
+	
+	socket.on("updateusers",function(user,profile){
+        console.log(user);
+    
+	$("#users").empty();
+	$.each(user,function(key,name){
+	//$("#users").append("<div><li id='green'><img class='img-circle' src='"+name+"'/> "+user[key]+"</li></div>");
+//	$('#users').append('<div><a href="#" onclick="switchRoom(\''+name+'\')">'+" " + user[key] + '</a></div>');
+	});
+	});
+	
+
+	function switchRoom(){
+        console.log("kkk")
+      history.pushState(null, '', '/'+event.target.id+' ');
+   console.log(event.target.id);
+      //  socket.emit("adduser","<%=username%>", event.target.id);
+        socket.emit('switchRoom',"<%=username%>",event.target.id);
+    
+	}
+
+	// on load of page
+	$(function(){
+
+		$.each(rooms, function(key, value) {
+			console.log(value)
+				$('#room').append('<div><p id='+value+' onclick="switchRoom(\''+value+'\')">'+" " + value + '</p></div>');
+	
+		});
+    
+		// when the client clicks SEND
+		$('#datasend').click( function() {
+			var message = $('#data').val();
+			if(message==''){
+			alert("Please type Message")
+			}
+			// tell server to execute 'sendchat' and send along one parameter
+			else{
+			$('#data').val('');
+            console.log("---------------------")
+            console.log(socket)
+			socket.emit('sendchat', message);
+			}
+		});
+
+		// when the client hits ENTER on their keyboard
+		$('#data').keypress(function(e) {
+			if(e.which == 13) {
+				$(this).blur();
+				$('#datasend').focus().click();
+			}
+		});
+		$("#sajib").click(function(){
+		socket.emit("mine","hi");
+		
+		});
+
+	})
+
+
+
+</script>
+
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    .post20{top:694px;
+border: 2px solid white;
+    border-radius: 4px;
+left:240px;
+background:#555;
+width:600px;
+height:45px;
+padding-left:10px;
+padding-right:10px;
+padding-top:10px;
+border-radius:3px/3px;
+-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+}
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li id="trick"><a href="#">About</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav" id="room">
+   
+    </div>
+    <div class="col-sm-8 text-left"> 
+    
+      <div class="gksajib9"></div></br>
+      <div class="golam"></div></br>
+      <div class="debian"></div></br>
+    </div>
+    <div class="col-sm-2 sidenav">
+      <b><div id="users"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+<div>
+<center><input type="text" class="post20"  id="data" placeholder="Write Message Here">
+<input type="button" value="button" id="datasend"/>
+</div>
+</footer>
+
+</body>
+</html>
