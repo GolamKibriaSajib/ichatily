@@ -30,6 +30,22 @@
             //this is used to close a popup
             function close_popup(id)
             {
+
+             check = check.reduce(function(a,b){
+                if (a.indexOf(b) < 0 ) a.push(b);
+                 return a;
+                   },[]);
+                   
+                   for(var i=0;i<check.length;i++){
+                   if(check[i]==id){
+                       check.splice(i,1);
+                   }
+
+                   }
+
+
+
+
                 for(var iii = 0; iii < popups.length; iii++)
                 {
                     if(id == popups[iii])
@@ -107,14 +123,20 @@
             }
 
 
-
+              var check=[];
               socket.on("pvtmessage",function(nick,text){
+                   var n=0;
                    
-                    console.log("worked");
-                  //  console.log(username);
-                    console.log(nick);
-                    console.log(text);
-                    
+                    check.push(nick);
+                    for(i=0;i<check.length;i++){
+                    if(check[i]==nick){
+                        n++
+                    }
+
+                    }
+                    if(n==1){
+                        register_popup(nick,nick);
+                    }
                                         
                 $("."+nick).append("<p>"+text+"</p>");
             
