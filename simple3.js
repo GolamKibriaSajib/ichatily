@@ -45,8 +45,28 @@ module.exports = function (io, chat) {
 			var data = {};
 			var data1 = {};
 			var room1;
-            var obj = { username: nick, room: channel }
+			var obj;
+			var i=0;
+            
+			bot.addListener('names',function(channel,nick){
+       
+		         for (var name in nick) {
+			       i++;
+         
+			 obj = { username: name, room: channel }
+            usernames.push(obj);
+
+             }
+		  })
+			 if(i==0){
+	
+		    obj = { username: nick, room: channel }
 			usernames.push(obj);
+			 }
+
+
+            // var obj = { username: nick, room: channel }
+			// usernames.push(obj);
 
 			usernames.forEach(function (elem) {
 			if (elem.room == channel) {

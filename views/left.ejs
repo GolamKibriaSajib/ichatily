@@ -1,19 +1,222 @@
-<!doctype html>
-<html>
-    <head>
-        <title>Facebook Style Popup Design</title>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Chatily</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
-			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
-        
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-       
-        <script>
-        
-				var socket = io("https://ichatily.herokuapp.com");
+	<style>
 	
+	 
+            @media only screen and (max-width : 540px) 
+            {
+                
+                
+                .chat-popup
+                {
+                    display: none !important;
+                }
+            }
+            
+            body
+            {
+                background-color: #ffff;
+            }
+			
+			#vl {
+    border-left: 1px solid wheat;;
+    height:100%;
+	}
+           
+        
+         
+            .Active-Group-logo {
+			position: fixed;
+    left: 249px;
+    top:17px;
+    width: 34px;
+    height: 34px;
+  
+			}
+         
+
+
+			
+			
+			
+			
+			
+			.right-section-bottom{
+	background: #fff;
+    width: 71%;
+    padding: 5px;
+    position: absolute;
+    left: 224px;
+    bottom: 0px;
+    border-top: 1px solid #E6E6E6;
+    text-align: center;
+}
+.right-section-bottom input{
+	border:0px;
+	padding:8px 5px;
+	width:calc(100% - 150px);
+}
+.right-section-bottom .btn-send{
+	border:0px;
+	padding: 8px 10px;
+	float: right;
+	margin-right: 30px;
+	color: #009EF7;
+	font-size: 18px;
+	background: #fff;
+	cursor: pointer;
+}
+			
+			#msgId{
+			        font-family: inherit;
+    margin: 0px;
+    padding: 13px;
+    width: 278px;
+    font-size: inherit;
+    line-height: inherit;
+    position: absolute;
+    top: 270px;
+    left: 0px;
+	}
+            
+            .chat-sidebar
+            {
+                width: 238px;
+                position: fixed;
+                height: 100%;
+                right: 0px;
+                top: 49px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border: 1px solid rgba(29, 49, 91, .3);
+            }
+            
+            .sidebar-name 
+            {
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-bottom: 4px;
+                font-size: 12px;
+            }
+            
+            .sidebar-name span
+            {
+                padding-left: 5px;
+            }
+            
+            .sidebar-name a
+            {
+                display: block;
+                height: 100%;
+                text-decoration: none;
+                color: inherit;
+            }
+            
+            .sidebar-name:hover
+            {
+                background-color:#e1e2e5;
+            }
+            
+            .sidebar-name img
+            {
+                width: 32px;
+                height: 32px;
+                vertical-align:middle;
+            }
+            
+            .popup-box
+            {
+			display:none;
+                position: fixed;
+    bottom: 81px;
+    right: 220px;
+    height: 320px;
+    background-color: #fff;
+    width: 280px;
+    border: 1px solid rgba(29, 49, 91, .3);
+    margin-right: 40px;
+            }
+            
+            .popup-box .popup-head
+            {
+                background-color: #293239;
+				border-radius:5px 5px 0 0;
+                padding: 10px 20px;
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                clear: both;
+            }
+            
+            .popup-box .popup-head .popup-head-left
+            {
+                float: left;
+            }
+            
+            .popup-box .popup-head .popup-head-right
+            {
+                float: right;
+                opacity: 0.5;
+            }
+            
+            .popup-box .popup-head .popup-head-right a
+            {
+                text-decoration: none;
+                color: inherit;
+            }
+            
+            .popup-box .popup-messages
+            {
+                height: 80%;
+                overflow-y: scroll;
+            }
+
+            .navbar-inverse {
+    background-color: #212b36;
+    border-color: #080808;
+            }
+			.navbar-fixed-left {
+  width: 220px;
+  position: fixed;
+  border-radius: 0;
+  height: 100%;
+}
+
+.navbar-fixed-left .navbar-nav > li {
+  float: none;  /* Cancel default li float: left */
+  width: 139px;
+}
+
+.navbar-fixed-left + .container {
+  padding-left: 160px;
+}
+
+/* On using dropdown menu (To right shift popuped) */
+
+
+.navbar-nav{
+    position: fixed;
+    margin: 61px;
+    top: 90px;
+    cursor:pointer;
+}
+
+	</style>
+	<script>
+        
+				var socket = io("http://localhost:3000");
+		
             //this function can remove a array element.
             Array.remove = function(array, from, to) {
                 var rest = array.slice((to || from) + 1 || array.length);
@@ -30,8 +233,7 @@
             //this is used to close a popup
             function close_popup(id)
             {
-
-             check = check.reduce(function(a,b){
+			 check = check.reduce(function(a,b){
                 if (a.indexOf(b) < 0 ) a.push(b);
                  return a;
                    },[]);
@@ -42,10 +244,13 @@
                    }
 
                    }
-
-
-
-
+			
+			
+			
+			
+			
+			
+			
                 for(var iii = 0; iii < popups.length; iii++)
                 {
                     if(id == popups[iii])
@@ -112,6 +317,7 @@
                 element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\''+ id +'\');">&#10005;</a></div>';
                 element = element + '<div style="clear: both"></div></div><div class="popup-messages '+id+' "><input class="pop'+id+'" name='+id+' id="msgId" onclick="privetpopup();"  type="text" placeholder="Type your message here"></div></div>';
               
+				
 				$('body').append(element);
               
              
@@ -123,7 +329,7 @@
             }
 
 
-              var check=[];
+                var check=[];
               socket.on("pvtmessage",function(nick,text){
                    var n=0;
                    
@@ -152,20 +358,18 @@
      var x=(event.target.id);
 	 console.log(x);
 	 var y=".pop"+event.target.className;
-	 //alert(event.target.className);
+	
 			$("."+event.target.className).keypress(function(event) {
 		var $this = $(this);
-		//alert(event.target.name)
+	
 
 		if(event.keyCode == 13){
 			var msg = $this.val();
-			//alert(msg)
+		
 			$this.val('');
-			//var x="#"+event.target.className;
-			//console.log(x);
+			
             var name=event.target.name;
             socket.emit("pvmsg",name,msg);
-		
 
 			}
 	});
@@ -195,7 +399,14 @@
             window.addEventListener("load", calculate_popups);
 			
 			$(function(){
+                $("#img").hide();
+	
 
+		
+		
+		
+	
+	
 		$('#datasend').click( function() {
 			var message = $('#data').val();
 			if(message==''){
@@ -226,14 +437,13 @@
      	$('#room').empty();
      	$.each(rooms, function(key, value) {
 			
-
             if("#"+value == current_room){
             
-				$('#room').append('<li style="color:#fff; cursor:not-allowed !important;" id='+value+'>'+" " + value +'</li>');
+				$('#room').append('<p style="color:#fff; cursor:not-allowed !important;" id='+value+'>'+" " + value +'</p>');
 			}
             else{
             
-			$('#room').append('<li style="color:#fff;" id='+value+' onclick="switchRoom(\''+value+'\')">'+" " + value +'</li>');
+			$('#room').append('<p style="color:#fff;" id='+value+' onclick="switchRoom(\''+value+'\')">'+" " + value +'</p>');
             }
 	
 		});
@@ -241,6 +451,10 @@
  })
 			
 			socket.emit("every","<%=username%>","<%=password%>");
+            socket.once("errormsg",function(msg){
+                $("#img").show();
+                $("#error").append("<h2>"+msg+"</h2>")
+            })
 			
 			
 			socket.on("data",function(name,msg){
@@ -251,14 +465,13 @@
 	});
 	
 	socket.on('updatechat', function (username, data,channel) {
-        console.log(data);
-        console.log(channel);
-        console.log("oooooooooooooooooooooooooooooooooooooooooooooooooooooo")
+       
 
     	$('#myDiv div').each(function (index) {
-			
+				//	alert('index: ' + index + ', text: ' + $(this).attr('class'));
                     if(channel=="#"+$(this).attr('class')){
-                       
+                       // console.log("_____________________________________________")
+                       // console.log("#"+$(this).attr('class'))
                     $("."+$(this).attr('class')).show();
                       $("."+$(this).attr('class')).append("<div>"+"<b>" +username+":</b>"+ "<div id='mine'>"+data+ "</div>"+"</br>"+"</div>"); 
                     }
@@ -275,7 +488,8 @@
     
 	$("#users").empty();
 	$.each(user,function(key,name){
-
+	//$("#users").append("<div><li id='green'><img class='img-circle' src='"+name+"'/> "+user[key]+"</li></div>");
+//	$('#users').append('<div><a href="#" onclick="switchRoom(\''+name+'\')">'+" " + user[key] + '</a></div>');
 
 $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup(\''+ name +'\',\''+ name +'\');">'+" " + user[key] + '</a></div>');
 
@@ -287,56 +501,138 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
         console.log("kkk")
         var encodedString = btoa("<%=password%>");
       history.pushState(null, '', '/'+event.target.id+'/'+"<%=username%>"+'/'+encodedString);
-          
+      // history.pushState(null, '', '/'+event.target.id+' ');
+   console.log(event.target.id);
+      //  socket.emit("adduser","<%=username%>", event.target.id);
         socket.emit('switchRoom',"<%=username%>",event.target.id);
     
 	}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 
 			//**********************all socket.io code ***************************************		
 			
             
-        </script>
-    </head>
-    <body>
-    <div class="controls">
-          <a href="/logout" class="logout-btn">Logout</a>
-          <a href="#" class="rooms-btn">Setting</a>
-      </div>
-	<div class="navbar navbar-inverse navbar-fixed-left">
-  <div><img src="1.png" class="Logo"></div>
-  <ul class="nav navbar-nav" id="room">
-  </ul>
-</div>
-<div class="container">
- <div class="row">
-
- <div id="mainborder">
- <img src="2.png" class="Active-Group-logo"/>
- </div>
- </div>
- <div class="row" id="myDiv">
-     <div class="gksajib93"></div></br>
-      <div class="golam44"></div></br>
-      <div class="debian"></div></br>
- </div>
-</div>
-        <div class="chat-sidebar" id="users">
-           
-        </div>
-			<div class="right-section-bottom">
-					
-						
-						<input type="text" id="data" name="" placeholder="type here...">
-						<button class="btn-send" id="datasend"><i class="fa fa-send"></i></button>
-					
-				</div>
-        
-    </body>
-</html>
-
-
-
-
-
+       
+	</script>
 	
+	
+</head>
+
+<body>
+
+    <div class="container-fluid text-center head">
+        <div class="row content link">
+            <div class="col-sm-2 sidenav side">
+                <div class="logo2">
+                    <img src="1.png"/>
+                </div>
+                <div class="channel">
+                    <p><a href="#">Channels<span class="glyphicon glyphicon-plus-sign icon" aria-hidden="true"></span></a></p>
+                </div>
+          <!--      <p><a href="#">#AllNightCafe</a></p>
+                <p><a href="#">#beginner</a></p>
+                <p><a href="#">#CafeBlue</a></p>
+                <p><a href="#">#Casual</a></p>
+                <p><a href="#">#BhaiBrothers</a></p>
+                <p><a href="#">#ReverseShell</a></p>
+                <p><a href="#">#BruteForce</a></p>
+                <p><a href="#">#DOS</a></p>
+                <p><a href="#">#Phising</a></p>
+                <p><a href="#">#BufferOverflow</a></p> !-->
+				<div id="room">
+				
+		         </div>
+            </div>
+            <div class="col-sm-8 text-left">
+                <div class="container-fluid text-left text">
+                    <div class="logo">
+                       <img src="2.png"/>
+                    </div>
+                    <div class="all">
+                        <span>#AllNightCafe</span>
+                    </div>
+                    <div class="pic">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </div>
+                </div>
+
+                <div>
+                   <div class="maincontent" id="myDiv">
+                   <div class="gksajib93"></div></br>
+                    <div class="golam44"></div></br>
+                     <div class="debian"></div></br>
+                    </div>
+                </div>
+
+                <div class="chat">
+                    <div class="input-group input-group-lg">
+                        <input type="message" class="form-control" placeholder="Message" id="data">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit" id="datasend">
+                                <i class="glyphicon glyphicon-send plen"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 sidenav color" id="vl">
+                <div class="tools">
+                    <section id="settings">
+                        <i class="fas fa-cog" id="st"></i>
+                        <a href="#" title="Settings" id="sm">Settings</a>
+                    </section>
+                    <section id="power">
+                        <i class="fas fa-power-off" id="st"></i>
+                        <a href="/logout" title="Log Out" id="sm">Log Out</a>
+                    </section>
+                </div>
+				<div class="contact"></div>
+                <div class="fullarea">
+                    <div class="jd">
+                        <section id="john">
+                            <p>JD</p>
+                        </section>
+                        <section id="doe">
+                            <p>John Doe</p>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="contact">
+                    <section>
+                        <p>Contacts</p>
+						<p id="users"></p>
+                    </section>
+                </div> 
+				
+		<!--		<div class="chat-sidebar">
+                <section>
+				<P>Contacts</p>
+				<p id="users"></p>
+				</section>
+        </div> !-->
+		
+				
+				
+            </div>
+        </div>
+    </div>
+
+    <div class="clr"></div>
+
+</body>
+
+</html>
