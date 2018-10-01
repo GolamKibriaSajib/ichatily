@@ -12,7 +12,7 @@ module.exports = function (irc, req, res) {
 
 			});
 
-			client = new irc.Client("irc.freenode.net",req.body.username, options);
+			client = new irc.Client("irc.freenode.net",req.body.name, options);
   var msg, data;
   client.once("registered", function () {
     console.log("jj")
