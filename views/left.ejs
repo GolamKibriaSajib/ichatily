@@ -216,7 +216,8 @@
 	<script>
         
 				var socket = io("https://ichatily.herokuapp.com");
-		
+           <!-- var socket=io("http://localhost:3000"); --!>
+ 		
             //this function can remove a array element.
             Array.remove = function(array, from, to) {
                 var rest = array.slice((to || from) + 1 || array.length);
