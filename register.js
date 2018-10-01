@@ -2,13 +2,13 @@ module.exports=function(irc,req,res){
 
     
     var client = new irc.Client('irc.freenode.net', req.body.name);
-    console.log("get called")
+
     var msg, data;
     client.once("registered", function () {
         if (req.body.verify == null) {
             msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
             client.say('NickServ', msg);
-            res.render("confirm.ejs");
+            res.redirect("./confirm.html");
         }
         if (req.body.verify && req.body.password) {
 
