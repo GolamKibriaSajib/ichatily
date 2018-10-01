@@ -10,7 +10,7 @@ module.exports=function(irc,req,res,app){
   let isDataSent = false;
 
   // Only extend the timeout for API requests
-  if (!req.url.includes('/api')) {
+  if (!req.url.includes('/signup')) {
     next();
     return;
   }
