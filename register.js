@@ -59,8 +59,9 @@ module.exports=function(irc,req,res,app){
     client.once("registered", function () {
         if (req.body.verify == null) {
             msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
-                app.use(extendTimeoutMiddleware);
+                
             client.say('NickServ', msg);
+            app.use(extendTimeoutMiddleware);
             console.log("redirect");
             res.redirect("./confirm.html");
         }
