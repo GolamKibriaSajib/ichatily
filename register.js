@@ -28,7 +28,8 @@ module.exports = function (irc, req, res) {
 
   // })
   var client = new irc.Client('irc.freenode.net', req.body.name, {
-    autoConnect: false
+    autoConnect: false,
+    sasl:false
   });
   client.connect('retryCount', function (serverReply) {
     console.log("Connected!\n", serverReply);
