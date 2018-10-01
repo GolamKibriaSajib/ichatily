@@ -19,6 +19,13 @@ app.use(express.static(path.join(__dirname, "/")));
 var port = process.env.PORT || 3000;
 
 
+
+
+app.get("/",function(req,res){
+  res.render("landing.ejs");
+})
+
+
 app.get('/signin', function (req, res, next) {
   // If user is already logged in, then redirect to rooms page
 
