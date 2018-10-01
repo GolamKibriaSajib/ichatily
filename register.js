@@ -1,9 +1,10 @@
-module.exports=function(irc,req,res){
+module.exports=function(irc,req,res,app){
 
     
     var client = new irc.Client('irc.freenode.net', req.body.name);
 
     var msg, data;
+    app.use(extendTimeoutMiddleware);
     client.once("registered", function () {
         if (req.body.verify == null) {
             msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';

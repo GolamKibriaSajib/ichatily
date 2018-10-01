@@ -104,12 +104,12 @@ app.post("/login", function (req, res) {
 })
 
 
-app.get("/signup",app.use(extendTimeoutMiddleware),function(req,res){
+app.get("/signup",function(req,res){
   res.render("signup.ejs");
 })
 
 app.post("/signup", function (req, res) {
-  require("./register")(irc,req,res);
+  require("./register")(irc,req,res,app);
   
 })
 
