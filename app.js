@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "/")));
 var port = process.env.PORT || 3000;
 
-
+var socketIO = require("./simple3")(io, irc);
 
 
 app.get("/",function(req,res){
@@ -42,7 +42,6 @@ app.get('/signin', function (req, res, next) {
 app.post("/login", function (req, res) {
   req.session.username = req.body.username;
   req.session.password = req.body.password;
-  require("./simple3")(io, irc, req.session);
   res.render("left.ejs", { username: req.body.username, password: req.body.password });
 })
 
