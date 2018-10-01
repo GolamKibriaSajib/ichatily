@@ -24,12 +24,12 @@ var port = process.env.PORT || 3000;
 var socketIO = require("./simple3")(io, irc);
 
 
-app.get("/",function(req,res){
-  if(req.session.username){
-    res.render("left.ejs",{username:req.session.username,password:req.session.password});
+app.get("/", function (req, res) {
+  if (req.session.username) {
+    res.render("left.ejs", { username: req.session.username, password: req.session.password });
   }
-  else{
-  res.render("landing.ejs");
+  else {
+    res.render("landing.ejs");
   }
 })
 
@@ -54,17 +54,17 @@ app.post("/login", function (req, res) {
 })
 
 
-app.get("/signup",function(req,res){
+app.get("/signup", function (req, res) {
   res.render("signup.ejs");
-})
+});
 
 app.post("/signup", function (req, res) {
-  require("./register")(irc,req,res,app);
-  
-})
+  require("./register")(irc, req, res);
+
+});
 
 app.post("/verify", function (req, res) {
-  require("./register")(irc,req,res);
+  require("./register")(irc, req, res);
 });
 
 app.get("/:channel/:username/:password", function (req, res) {

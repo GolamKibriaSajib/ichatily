@@ -1,67 +1,14 @@
-module.exports=function(irc,req,res,app){
+module.exports=function(irc,req,res){
 
     
     var client = new irc.Client('irc.freenode.net', req.body.name);
-
+console.log(client);
     var msg, data;
-    const extendTimeoutMiddleware = (req, res, next) => {
-  const space = ' ';
-  let isFinished = false;
-  let isDataSent = false;
-
-  // Only extend the timeout for API requests
-  if (!req.url.includes('/signup')) {
-    next();
-    return;
-  }
-
-  res.once('finish', () => {
-    isFinished = true;
-  });
-
-  res.once('end', () => {
-    isFinished = true;
-  });
-
-  res.once('close', () => {
-    isFinished = true;
-  });
-
-  res.on('data', (data) => {
-    // Look for something other than our blank space to indicate that real
-    // data is now being sent back to the client.
-    if (data !== space) {
-      isDataSent = true;
-    }
-  });
-
-  const waitAndSend = () => {
-    setTimeout(() => {
-      // If the response hasn't finished and hasn't sent any data back....
-      if (!isFinished && !isDataSent) {
-        // Need to write the status code/headers if they haven't been sent yet.
-        if (!res.headersSent) {
-          res.writeHead(202);
-        }
-
-        res.write(space);
-
-        // Wait another 15 seconds
-        waitAndSend();
-      }
-    }, 15000);
-  };
-
-  waitAndSend();
-  next();
-};
-
     client.once("registered", function () {
         if (req.body.verify == null) {
             msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
-                
+            console.log(msg)
             client.say('NickServ', msg);
-            app.use(extendTimeoutMiddleware);
             console.log("redirect");
             res.redirect("./confirm.html");
         }
