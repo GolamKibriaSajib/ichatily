@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.75);
+}
+
+nav .nav-wrapper {
+    position: relative;
+    height: 100%;
+    background: #fff;
+}
+
+nav,
+img {
+    margin-top: 20px;
+    ;
+}
+
+.left-sec .signup {
+    margin: 100px 0 30px;
+    font-family: Roboto;
+    font-size: 25px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.04;
+    letter-spacing: normal;
+    text-align: left;
+    color: #63c9e1;
+}
+
+.left-sec label {
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.63;
+    letter-spacing: normal;
+    text-align: left;
+    color: #484848;
+}
+
+.left-sec #btn {
+    background: #0584ff;
+    margin-bottom: 30px;
+}
+
+.left-sec,
+.accunt {
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.86;
+    letter-spacing: normal;
+    text-align: left;
+    color: #484848;
+}
+
+.left-sec span {
+    font-weight: bold;
+    color: #0584ff;
+}
+
+.image {
+    margin-top: 50px;
+}

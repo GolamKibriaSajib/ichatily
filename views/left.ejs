@@ -433,27 +433,32 @@
 			
 //**********************all socket.io code ***************************************		
 
- socket.on("updatechannel",function(rooms,current_room){
+socket.on("updatechannel",function(rooms,current_room,check){
      	$('#room').empty();
-     	$.each(rooms, function(key, value) {
-			
+       if(check){
+     	$.each(check, function(key, value) {
+		$('#room').append('<p style="color:#fff; cursor:not-allowed !important;" id='+value+'>'+" " + value +'</p>');
+		});
+   }
+    else  {
+     	   $.each(rooms, function(key, value) {
             if("#"+value == current_room){
-            
-				$('#room').append('<p style="color:#fff; cursor:not-allowed !important;" id='+value+'>'+" " + value +'</p>');
+			$('#room').append('<p style="color:#fff; cursor:not-allowed !important;" id='+value+'>'+" " + value +'</p>');
 			}
             else{
-            
 			$('#room').append('<p style="color:#fff;" id='+value+' onclick="switchRoom(\''+value+'\')">'+" " + value +'</p>');
             }
-	
 		});
+ }
 
- })
+ });
+		
 			
 			socket.emit("every","<%=username%>","<%=password%>");
             socket.once("errormsg",function(msg){
                 $("#img").show();
-                $("#error").append("<h2>"+msg+"</h2>")
+                  $("#check").hide();
+                $("#myDiv").append("<h2>"+msg+"</h2>")
             })
 			
 			
@@ -537,7 +542,7 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
         <div class="row content link">
             <div class="col-sm-2 sidenav side">
                 <div class="logo2">
-                    <img src="1.png"/>
+                    <img src="/1.png"/>
                 </div>
                 <div class="channel">
                     <p><a href="#">Channels<span class="glyphicon glyphicon-plus-sign icon" aria-hidden="true"></span></a></p>
@@ -559,7 +564,7 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
             <div class="col-sm-8 text-left">
                 <div class="container-fluid text-left text">
                     <div class="logo">
-                       <img src="2.png"/>
+                       <img src="/2.png"/>
                     </div>
                     <div class="all">
                         <span>#AllNightCafe</span>
@@ -571,6 +576,7 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
 
                 <div>
                    <div class="maincontent" id="myDiv">
+                 <div id="check">Loading...wait a few second(minimum 7sec) to check your username & password</div>
                    <div class="gksajib93"></div></br>
                     <div class="golam44"></div></br>
                      <div class="debian"></div></br>

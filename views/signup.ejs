@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!--Import main.css-->
+    <link type="text/css" rel="stylesheet" href="/style3.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <div class="container">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo"><img src="/img/logo.png" srcset="/img/logo@2x.png 2x,
+                /img/logo@3x.png 3x"
+                        class="Logo"></a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="left-sec">
+            <div class="row">
+                <form class="col s6" action="/signup" method="POST">
+                    <p class="signup">Sign Up</p>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Name" id="first_name" type="text" class="validate" name="name">
+                            <label for="first_name">Enter your nick name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Email" id="email" type="text" class="validate" name="email">
+                            <label for="email">Enter your email address</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Password" id="password" type="password" class="validate" name="password">
+                            <label for="password">Enter Password</label>
+                        </div>
+                    </div>
+             <!--       <a id="btn" class="waves-effect waves-light btn-large">Connect</a> -->
+                <button type="submit" id="btn" class="waves-effect waves-light btn-large">Connect</button>
+                    <p class="account">Already have account? <span><a href="#">Sign in</a></span></p>
+                </form>
+
+                <div class="right-sec">
+                    <div class="row">
+                        <div class="col s6">
+                            <div class="image">
+                                <img src="/img/sign-up-illustration.png" srcset="/img/sign-up-illustration@2x.png 2x,
+             /img/sign-up-illustration@3x.png 3x"
+                                    class="Sign-up-illustration">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>

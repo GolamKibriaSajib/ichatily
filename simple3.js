@@ -1,4 +1,4 @@
-module.exports = function (io, chat) {
+module.exports = function (io, chat,session) {
 	// usernames which are currently connected to the chat
 	var usernames = [];
 	var roomCheck = ['#gksajib93', '#golam'];
@@ -12,6 +12,7 @@ module.exports = function (io, chat) {
 		var room1;
 		var bot;
 		var options;
+			var session=session;
 		socket.emit("updatechannel",rooms);
 		socket.on("every", function (username, password) {
 
@@ -32,8 +33,21 @@ module.exports = function (io, chat) {
 			bot.addListener("error", OnError);
 
 			function OnError(message) {
-				console.log("IRC Error:", message);
-				socket.emit("errormsg", "plz check username & password");
+				
+             cookie.destroy(function(err){
+				 if(err){
+					 throw err;
+				 }
+				 	console.log("IRC Error:", message);
+					socket.emit("errormsg", "plz check username & password");
+					socket.emit("updatechannel",null,null,rooms)
+						
+			 })
+
+
+
+				//console.log("IRC Error:", message);
+			//	socket.emit("errormsg", "plz check username & password");
 			}
           
 		  function onSelf(to,text){
