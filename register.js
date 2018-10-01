@@ -2,7 +2,7 @@ module.exports=function(irc,req,res){
 
     
     var client = new irc.Client('irc.freenode.net', req.body.name);
-    
+    console.log("get called")
     var msg, data;
     client.once("registered", function () {
         if (req.body.verify == null) {

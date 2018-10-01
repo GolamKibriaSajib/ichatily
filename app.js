@@ -22,7 +22,12 @@ var socketIO = require("./simple3")(io, irc);
 
 
 app.get("/",function(req,res){
+  if(req.session.username){
+    res.render("left.ejs",{username:req.session.username,password:req.session.password});
+  }
+  else{
   res.render("landing.ejs");
+  }
 })
 
 
@@ -51,7 +56,7 @@ app.get("/signup",function(req,res){
 })
 
 app.post("/signup", function (req, res) {
-  require("./register")(irc,req,res)
+  require("./register")(irc,req,res);
   
 })
 
