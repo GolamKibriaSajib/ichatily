@@ -14,7 +14,7 @@ module.exports = function (irc, req, res) {
   var client = new irc.Client("irc.freenode.net", 'pongo', options);
   var msg, data;
   client.once("registered", function () {
-    console.log("jj");
+    console.log("***************8*********************************************");
     if (req.body.verify == null) {
       var client = new irc.Client("irc.freenode.net", req.body.name, options);
       msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
