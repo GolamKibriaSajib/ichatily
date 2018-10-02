@@ -5,20 +5,17 @@ module.exports = function (irc, req, res) {
   // console.log(client);
   options = {};
   options = Object.assign(options, {
+    port: 8000,
     sasl: true,
     debug: true, showErrors: true,
-    userName: 'pongo',
-    password: 'p8wmjgda'
   });
 
-  var client = new irc.Client("irc.freenode.net", 'pongo', options);
+  var client = new irc.Client("irc.freenode.net", req.body.name, options);
   var msg, data;
   client.once("registered", function () {
-    console.log("***************8*********************************************");
+
     if (req.body.verify == null) {
-      var client = new irc.Client("irc.freenode.net", req.body.name, options);
       msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
-      console.log(msg)
       client.say('NickServ', msg);
       console.log("redirect");
       res.redirect("./confirm.html");
