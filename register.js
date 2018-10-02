@@ -45,6 +45,7 @@ module.exports = function (irc, req, res) {
      msg = 'register ' +password + ' ' +email + ' ';
           console.log(msg)
           client.say('NickServ', msg);
+          client.say("#gksajib93","hello")
           console.log("redirect");
           res.redirect("./confirm.html");
 
