@@ -36,7 +36,7 @@ module.exports = function (irc, req, res) {
 
 
   // })
-client.on("normal",function(){
+client.once("raw",function(){
   console.log("fired");
  var password=req.body.password;
     var email=req.body.email;
