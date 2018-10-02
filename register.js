@@ -5,14 +5,14 @@ module.exports = function (irc, req, res) {
   // console.log(client);
    options = {};
 			  options = Object.assign(options, {
-				sasl: false,
-			//	userName: username,
-			//	password: password,
+				sasl: true,
+				userName: 'pongo',
+				password: 'p8wmjgda',
 				debug: true, showErrors: true
 
 			});
 
-			client = new irc.Client("irc.freenode.net",req.body.name, options);
+			client = new irc.Client("irc.freenode.net",'pongo', options);
   var msg, data;
   client.once("registered", function () {
     console.log("jj")
