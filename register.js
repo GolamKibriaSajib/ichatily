@@ -17,7 +17,7 @@ module.exports = function (irc, req, res) {
       msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
       client.say('NickServ', msg);
       console.log("redirect");
-      res.redirect("./confirm.html"); 
+      res.redirect("./confirm.html");  
     }
     if (req.body.verify && req.body.password) {
 
