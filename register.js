@@ -40,15 +40,6 @@ module.exports = function (irc, req, res) {
   client.addListener("error", OnError);
 
   function OnError(message) {
-
- msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
-          console.log(msg)
-          client.say('NickServ', msg);
-          console.log("redirect");
-          res.redirect("./confirm.html");
-
-
-
     console.log("IRC Error:", message);
   }
 
