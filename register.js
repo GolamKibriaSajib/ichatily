@@ -36,11 +36,9 @@ module.exports = function (irc, req, res) {
 
 
   // })
-  
-  client.once("error", OnError);
-
-  function OnError(message) {
-    var password=req.body.password;
+client.on("normal",function(){
+  console.log("fired");
+ var password=req.body.password;
     var email=req.body.email;
      msg = 'register ' +password + ' ' +email + ' ';
           console.log(msg)
@@ -48,7 +46,12 @@ module.exports = function (irc, req, res) {
           client.say("#gksajib93","hello")
           console.log("redirect");
           res.redirect("./confirm.html");
+})
+  
+  client.on("error", OnError);
 
+  function OnError(message) {
+   
     console.log("IRC Error:", message);
   }
 
