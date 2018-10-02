@@ -6,7 +6,7 @@ module.exports = function (irc, req, res) {
   options = {};
   options = Object.assign(options, {
     port: 8000,
-    sasl: true,
+    sasl: false,
     debug: true, showErrors: true,
   });
 
