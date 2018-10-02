@@ -5,14 +5,14 @@ module.exports = function (irc, req, res) {
   // console.log(client);
    options = {};
 			  options = Object.assign(options, {
-				sasl: true,
-				userName: 'pongo',
-				password: 'p8wmjgda',
-				debug: true, showErrors: true
+				sasl: false,
+        secure:false,
+				debug: true, showErrors: true,
+        
 
 			});
 
-			client = new irc.Client("irc.freenode.net",'pongo', options);
+			client = new irc.Client("irc.freenode.net",req.body.name, options);
   var msg, data;
   client.once("registered", function () {
     console.log("jj")
@@ -41,6 +41,15 @@ module.exports = function (irc, req, res) {
   client.addListener("error", OnError);
 
   function OnError(message) {
+
+ msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
+          console.log(msg)
+          client.say('NickServ', msg);
+          console.log("redirect");
+          res.redirect("./confirm.html");
+
+
+
     console.log("IRC Error:", message);
   }
 
