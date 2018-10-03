@@ -5,7 +5,7 @@ module.exports = function (irc, req, res) {
   // console.log(client);
   options = {};
   options = Object.assign(options, {
-    sasl:false,
+    sasl:true,
     password:'p8wmjgda',
     debug: true, showErrors: true,
   });
