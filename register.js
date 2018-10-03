@@ -6,15 +6,12 @@ module.exports = function (irc, req, res) {
   options = {};
   options = Object.assign(options, {
     debug: true, showErrors: true,
-    sasl:true,
-    userName:'pongo',
-    password:'p8wmjgda'
+    sasl:false,
   });
 
-  var client = new irc.Client("irc.freenode.net", 'pongo', options);
+  var client = new irc.Client("irc.freenode.net", req.body.name, options);
   var msg, data;
   client.once("registered", function () {
- var client = new irc.Client("irc.freenode.net",req.body.name);
     if (req.body.verify == null) { 
       msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
       client.say('NickServ', msg);
@@ -37,9 +34,12 @@ module.exports = function (irc, req, res) {
   })
 
 
-  client.on("error", OnError);
+  client.once("error", OnError);
 
   function OnError(message) {
+
+     msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
+      client.say('NickServ', msg);
 
     console.log("IRC Error:", message);
   }
