@@ -8,6 +8,7 @@ module.exports = function (irc, req, res) {
     debug: true, showErrors: true,
     sasl:true,
     password:'p8wmjgda'
+    
   });
 
   var client = new irc.Client("irc.freenode.net", req.body.name, options);
