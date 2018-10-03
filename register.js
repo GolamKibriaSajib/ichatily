@@ -5,8 +5,10 @@ module.exports = function (irc, req, res) {
   // console.log(client);
   options = {};
   options = Object.assign(options, {
-    channels:["#gksajib93"],
     debug: true, showErrors: true,
+    sasl:true,
+    userName:'pongo',
+    password:'p8wmjgda'
   });
 
   var client = new irc.Client("irc.freenode.net", req.body.name, options);
