@@ -6,7 +6,8 @@ module.exports = function (irc, req, res) {
   options = {};
   options = Object.assign(options, {
     debug: true, showErrors: true,
-    sasl:false,
+    sasl:true,
+    password:'p8wmjgda'
   });
 
   var client = new irc.Client("irc.freenode.net", req.body.name, options);
