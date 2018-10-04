@@ -6,9 +6,12 @@ module.exports = function (irc, req, res) {
   options = {};
   options = Object.assign(options, {
     debug: true, showErrors: true, 
+    autoConnect:false
   });
 
-  var client = new irc.Client("chat.freenode.net", req.body.name, options);
+  var client = new irc.Client("irc.freenode.net", req.body.name, options);
+  console.log(client);
+  client.join("#gksajib93")
   var msg, data;
   client.once("registered", function () {
     if (req.body.verify == null) { 
