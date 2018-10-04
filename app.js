@@ -34,17 +34,17 @@ app.get("/", function (req, res) {
 })
 
 
-// app.get('/signin', function (req, res, next) {
-//   // If user is already logged in, then redirect to rooms page
+app.get('/signin', function (req, res, next) {
+  // If user is already logged in, then redirect to rooms page
 
-//   if (req.session.username) {
-//     res.render("left.ejs", { username: req.session.username, password: req.session.password });
-//   }
-//   else {
-//     res.render("siginin.ejs");
-//   }
+  if (req.session.username) {
+    res.render("left.ejs", { username: req.session.username, password: req.session.password });
+  }
+  else {
+    res.render("siginin.ejs");
+  }
 
-// });
+});
 
 
 app.post("/signin", function (req, res) {
