@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "start": "node appzz.js"
+    "start": "node app.js"
   },
   "author": "",
   "license": "BSD-2-Clause",
