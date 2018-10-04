@@ -1,8 +1,4 @@
 module.exports = function (irc, req, res) {
-
-
-  //     var client = new irc.Client('irc.freenode.net', req.body.name);
-  // console.log(client);
   options = {};
   options = Object.assign(options, {
     debug: true, showErrors: true, 

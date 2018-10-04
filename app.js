@@ -34,20 +34,20 @@ app.get("/", function (req, res) {
 })
 
 
-app.get('/signin', function (req, res, next) {
-  // If user is already logged in, then redirect to rooms page
+// app.get('/signin', function (req, res, next) {
+//   // If user is already logged in, then redirect to rooms page
 
-  if (req.session.username) {
-    res.render("left.ejs", { username: req.session.username, password: req.session.password });
-  }
-  else {
-    res.render("login.ejs");
-  }
+//   if (req.session.username) {
+//     res.render("left.ejs", { username: req.session.username, password: req.session.password });
+//   }
+//   else {
+//     res.render("siginin.ejs");
+//   }
 
-});
+// });
 
 
-app.post("/login", function (req, res) {
+app.post("/signin", function (req, res) {
   req.session.username = req.body.username;
   req.session.password = req.body.password;
   res.render("left.ejs", { username: req.body.username, password: req.body.password });
@@ -76,24 +76,34 @@ app.get("/:channel/:username/:password", function (req, res) {
     res.render("left.ejs", { username: req.params.username, password: decode });
   }
   else {
-    res.render("login.ejs");
+    res.render("signin.ejs");
   }
 
   //    console.log(req.params.channel)
 })
 
 app.get("/logout", function (req, res) {
-  req.session.destroy(function (err) {
-    if (err) {
-      console.log(err);
-    } else {
 
-      res.render("login.ejs");
-    }
+  if (req.session) {
+    req.session.destroy(function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+
+        res.render("signin.ejs");
+      }
 
 
-  })
+
+    })
+  }
+  else {
+    res.render("siginin.ejs");
+  }
+
 })
+
+
 
 
 

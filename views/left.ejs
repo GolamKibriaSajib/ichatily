@@ -215,7 +215,7 @@
 	</style>
 	<script>
         
-				var socket = io("https://ichatily.herokuapp.com");
+				var socket = io("https://ichatily.cleverapps.io");
           <!--  var socket = io("https://lobalhost:3000"); --!>
         
  		
@@ -403,12 +403,6 @@
 			$(function(){
                 $("#img").hide();
 	
-
-		
-		
-		
-	
-	
 		$('#datasend').click( function() {
 			var message = $('#data').val();
 			if(message==''){
@@ -417,8 +411,7 @@
 			// tell server to execute 'sendchat' and send along one parameter
 			else{
 			$('#data').val('');
-            console.log("---------------------")
-            console.log(socket)
+            
 			socket.emit('sendchat', message);
 			}
 		});
@@ -465,8 +458,7 @@ socket.on("updatechannel",function(rooms,current_room,check){
 			
 			
 			socket.on("data",function(name,msg){
-		console.log("kk")
-    console.log(name)
+	
 		socket.emit('userchat', name,msg);
 
 	});
@@ -475,10 +467,8 @@ socket.on("updatechannel",function(rooms,current_room,check){
        
 
     	$('#myDiv div').each(function (index) {
-				//	alert('index: ' + index + ', text: ' + $(this).attr('class'));
+
                     if(channel=="#"+$(this).attr('class')){
-                       // console.log("_____________________________________________")
-                       // console.log("#"+$(this).attr('class'))
                     $("."+$(this).attr('class')).show();
                       $("."+$(this).attr('class')).append("<div>"+"<b>" +username+":</b>"+ "<div id='mine'>"+data+ "</div>"+"</br>"+"</div>"); 
                     }
@@ -495,8 +485,6 @@ socket.on("updatechannel",function(rooms,current_room,check){
     
 	$("#users").empty();
 	$.each(user,function(key,name){
-	//$("#users").append("<div><li id='green'><img class='img-circle' src='"+name+"'/> "+user[key]+"</li></div>");
-//	$('#users').append('<div><a href="#" onclick="switchRoom(\''+name+'\')">'+" " + user[key] + '</a></div>');
 
 $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup(\''+ name +'\',\''+ name +'\');">'+" " + user[key] + '</a></div>');
 
@@ -508,33 +496,15 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
         console.log("kkk")
         var encodedString = btoa("<%=password%>");
       history.pushState(null, '', '/'+event.target.id+'/'+"<%=username%>"+'/'+encodedString);
-      // history.pushState(null, '', '/'+event.target.id+' ');
-   console.log(event.target.id);
-      //  socket.emit("adduser","<%=username%>", event.target.id);
         socket.emit('switchRoom',"<%=username%>",event.target.id);
     
 	}
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
 			//**********************all socket.io code ***************************************		
 			
             
        
 	</script>
-	
 	
 </head>
 

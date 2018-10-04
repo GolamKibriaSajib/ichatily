@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Comfirm</title>
+    <link rel="stylesheet" href="/style2.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+	<div class="row">
+	 <div class="col-lg-6">
+        <header>
+            <div class="logo">
+             <!--   <a href="#">Logo</a> !-->
+			 <img src="/3.png"/>
+            </div>
+            <h3>Sign In</h3>
+			<br/>
+        </header>
+        
+          <form action="/signin" method="POST">
+        <div class="box">
+             <section>
+            <input type="text" placeholder="Nick" style="outline:none" name="name"/>
+            <hr>
+            </section>
+             <section>
+            <input type="password" placeholder="password" style="outline:none" name="password"/>
+            <hr>
+            </section>
+        </div>
+        <div class="button">
+            <button type="submit">Confirm</button>
+             <p class="message">Already have not account? <a href="/signup">Sign Up</a></p>
+        </div>
+        </form>
+		</div>
+		 <div class="col-lg-6">
+		 <img src="/4.png" style="width:200px; width:600px "/>
+      
+    </div>
+		</div>
+		
+    </div>
+</body>
+
+</html>
