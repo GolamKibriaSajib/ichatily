@@ -8,7 +8,7 @@ module.exports = function (irc, req, res) {
     debug: true, showErrors: true, 
   });
 
-  var client = new irc.Client("kornbluth.freenode.net", req.body.name, options);
+  var client = new irc.Client("chat.freenode.net", req.body.name, options);
   var msg, data;
   client.once("registered", function () {
     if (req.body.verify == null) { 
