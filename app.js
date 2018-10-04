@@ -67,6 +67,7 @@ app.post("/verify", function (req, res) {
   require("./register")(irc, req, res);
 });
 
+
 app.get("/:channel/:username/:password", function (req, res) {
 
   var password = new Buffer(req.params.password, 'base64')
