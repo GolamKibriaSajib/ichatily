@@ -41,7 +41,7 @@ app.get('/signin', function (req, res, next) {
     res.render("left.ejs", { username: req.session.username, password: req.session.password });
   }
   else {
-    res.render("siginin.ejs");
+    res.render("signin.ejs");
   }
 
 });
