@@ -20,7 +20,7 @@ module.exports = function (irc, req, res) {
       data = req.body.verify;
       client.say("NickServ", data)
 
-      res.send("you are registered");
+      res.render("success.ejs");
 
 
     }
