@@ -6,36 +6,32 @@ module.exports = function (irc, req, res) {
   options = {};
   options = Object.assign(options, {
     debug: true, showErrors: true, 
-    sasl:false,
-    password:req.body.password
-
+    password:''
   });
 
   var client = new irc.Client("irc.freenode.net", req.body.name, options);
   var msg, data;
-  client.join("#gksajib93");
+  client.once("registered", function () {
+    if (req.body.verify == null) { 
+      msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
+      client.say('NickServ', msg);
+      console.log("redirect");
+      res.redirect("./confirm.html");  
+    }
+    if (req.body.verify && req.body.password) {
 
-  // client.once("registered", function () {
-  //   if (req.body.verify == null) { 
-  //     msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
-  //     client.say('NickServ', msg);
-  //     console.log("redirect");
-  //     res.redirect("./confirm.html");  
-  //   }
-  //   if (req.body.verify && req.body.password) {
+      var password = req.body.password;
+      client.say('NickServ', 'identify ' + req.body.name + " " + password);
+      data = req.body.verify;
+      client.say("NickServ", data)
 
-  //     var password = req.body.password;
-  //     client.say('NickServ', 'identify ' + req.body.name + " " + password);
-  //     data = req.body.verify;
-  //     client.say("NickServ", data)
-
-  //     res.send("you are registered");
+      res.send("you are registered");
 
 
-  //   }
+    }
 
 
-  // })
+  })
 
 
   client.once("error", OnError);
