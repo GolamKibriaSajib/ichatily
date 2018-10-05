@@ -19,6 +19,8 @@ app.use(express.static(path.join(__dirname, "/")));
 var port = process.env.PORT || 3000;
 
 // app.use(extendTimeoutMiddleware);
+var username;
+var password;
 
 var socketIO = require("./simple3")(io, irc);
 
@@ -58,14 +60,14 @@ app.get("/signup", function (req, res) {
 });
 
 app.post("/signup", function (req, res) {
-  req.session.username = req.body.name;
-  req.session.password = req.body.password;
-  require("./register")(irc, req, res);
+  username = req.body.name;
+ password = req.body.password;
+  require("./register")(irc, req, res,username,password);
 
 });
 
 app.post("/verify", function (req, res) {
-  require("./register")(irc, req, res);
+  require("./register")(irc, req, res,username,password);
 });
 
 

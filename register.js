@@ -1,11 +1,11 @@
-module.exports = function (irc, req, res) {
+module.exports = function (irc, req, res,username,password) {
   var options = {};
 
   options = Object.assign(options, {
     debug: true, showErrors: true,
   });
 
-  var client = new irc.Client("irc.freenode.net", req.session.username, options);
+  var client = new irc.Client("irc.freenode.net", username, options);
   var msg, data;
 
   client.once("registered", function () {
@@ -13,21 +13,17 @@ module.exports = function (irc, req, res) {
       msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
       client.say('NickServ', msg);
       console.log("redirect");
-      res.render("confirm.ejs",{username:req.session.username,mail:req.body.email});
+      res.render("confirm.ejs",{username:username,mail:req.body.email});
       return client;
 
     }
     if (req.body.verify) {
-      var password = req.session.password;
-      client.say('NickServ', 'identify ' + req.session.username + " " + password);
+      var password = password;
+      client.say('NickServ', 'identify ' + username + " " + password);
       data = req.body.verify;
       client.say("NickServ", data)
-       req.session.destroy(function(err){
-         if(err){
-           throw err;
-         }
-          res.render("success.ejs");
-       })
+        res.render("success.ejs");
+       
     
 
 
