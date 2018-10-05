@@ -168,29 +168,37 @@ module.exports = function (io, chat) {
 			else{	
 
 
-				       for (var i = 0; i < usernames.length; i++) {
-				      	if (usernames[i].username == socket.username) {
-						usernames.splice(i, 1);
-					   }
-			     	}
-                //   usernames = usernames.reduce((unique, o) => {
-                //    if(!unique.some(obj => obj.username === o.username)) {
-                //      unique.push(o);
-                //          }
-                //     return unique;
-                //     },[]);
+				    //    for (var i = 0; i < usernames.length; i++) {
+				    //   	if (usernames[i].username == socket.username) {
+					// 	usernames.splice(i, 1);
+					//    }
+			     	// }
+                  usernames = usernames.reduce((unique, o) => {
+                   if(!unique.some(obj => obj.username === o.username)) {
+                     unique.push(o);
+                         }
+                    return unique;
+                    },[]);
 
-
-			
-				console.log(usernames)
 
 			     //	bot.part(socket.room);
 				//	bot.disconnect();
+				console.log(bot.opt.channels);
+			   var	chanelList=bot.opt.channels;
+			   var counter=0;
 				socket.leave(socket.room, function () {			
 					socket.room = '#' + channel;
 					socket.join(socket.room);
-					bot.join(socket.room);
-
+					for(var i=0;i<chanelList.length;i++){
+						if(chanelList[i]==socket.room){
+							counter++;
+						}
+					} 
+					console.log("_________________");
+					console.log(counter);
+					if(counter>0){
+					//bot.join(socket.room);
+               console.log("happen*******************************")
 					socket.emit("updatechannel",rooms,socket.room);
 					var obj = { username: socket.username, room: socket.room }
 					usernames.push(obj);
@@ -209,6 +217,11 @@ module.exports = function (io, chat) {
 					
 					io.sockets.in(socket.room).emit('updateusers', data);
 					io.sockets.in(room1).emit('updateusers', data1);
+				}
+				else{
+					console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+					bot.join(socket.room);
+				}
 					
 				});
 			}
@@ -230,17 +243,22 @@ module.exports = function (io, chat) {
 				 
 				 
 					   
-                     for (var i = 0; i < usernames.length; i++) {
-				    	if (usernames[i].username == socket.username) {
-						usernames.splice(i, 1);
-				    	}
-			    	}
+                    //  for (var i = 0; i < usernames.length; i++) {
+				    // 	if (usernames[i].username == socket.username) {
+					// 	usernames.splice(i, 1);
+				    // 	}
+			    	// }
+					  usernames = usernames.reduce((unique, o) => {
+                   if(!unique.some(obj => obj.username === o.username)) {
+                     unique.push(o);
+                         }
+                    return unique;
+                    },[]);
 			
-				socket.leave(socket.room, function () {	
-					socket.room=null;		
+				socket.leave(socket.room, function () {		
 					usernames.forEach(function (elem) {
 						
-						if (elem.room == socket.room) {
+						if (elem.room == socket.room && elem.username == socket.username) {
 						
 							data[elem.username] = elem.username;
 						}
@@ -249,7 +267,8 @@ module.exports = function (io, chat) {
 							room1 = elem.room;
 						}
 					});
-					
+
+					socket.room=null;
 					io.sockets.in(socket.room).emit('updateusers', data);
 					io.sockets.in(room1).emit('updateusers', data1);
 		});

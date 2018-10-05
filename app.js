@@ -49,9 +49,7 @@ app.get('/signin', function (req, res, next) {
 
 
 app.post("/signin", function (req, res) {
-  req.session.username = req.body.name;
-  req.session.password = req.body.password;
-  res.render("left.ejs", { username: req.body.name, password: req.body.password, channel: null });
+ require("./checkLogin")(irc,req,res);
 })
 
 

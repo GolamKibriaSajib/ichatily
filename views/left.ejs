@@ -220,8 +220,8 @@
 	</style>
 	<script>
         
-				var socket = io("https://ichatily.cleverapps.io");
-          <!--  var socket = io("http://localhost:3000"); --!>
+			//	var socket = io("https://ichatily.cleverapps.io");
+            var socket = io("http://localhost:3000");
         
  		
             //this function can remove a array element.
@@ -406,7 +406,14 @@
             window.addEventListener("load", calculate_popups);
 			
 			$(function(){
+                var nameShorter="<%=username%>";
+                
+
+               $("#nameShort").text(nameShorter.slice(0,2));
+
+
                 $("#img").hide();
+                
 	
 		$('#datasend').click( function() {
 			var message = $('#data').val();
@@ -452,9 +459,8 @@ socket.on("updatechannel",function(rooms,current_room,check){
  }
 
  });
-              var auth="<%=channel%>";
-		   console.log(auth);
-			if(auth==''){
+              var checkChannel="<%=channel%>";
+			if(checkChannel==''){
 			socket.emit("every","<%=username%>","<%=password%>");
             }
             else{
@@ -479,8 +485,6 @@ socket.on("updatechannel",function(rooms,current_room,check){
 	});
 	
 	socket.on('updatechat', function (username, data,channel) {
-       
-
     	$('#myDiv div').each(function (index) {
 
                     if(channel=="#"+$(this).attr('class')){
@@ -519,6 +523,7 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
            socket.emit('switchRoom',"<%=username%>","<%=channel%>");
     
 	}
+
 		
 			
 			//**********************all socket.io code ***************************************		
@@ -602,10 +607,10 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
                 <div class="fullarea">
                     <div class="jd">
                         <section id="john">
-                            <p>JD</p>
+                            <p id="nameShort"></p>
                         </section>
                         <section id="doe">
-                            <p>John Doe</p>
+                            <p><%=username%></p>
                         </section>
                     </div>
                 </div>
