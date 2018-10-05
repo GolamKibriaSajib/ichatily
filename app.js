@@ -18,7 +18,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "/")));
 var port = process.env.PORT || 3000;
 
+
+
 // app.use(extendTimeoutMiddleware);
+
 var username;
 var password;
 
@@ -54,7 +57,13 @@ app.post("/signin", function (req, res) {
 
 
 app.get("/signup", function (req, res) {
-  res.render("signup.ejs");
+  if(req.session.username){
+      res.render("signup.ejs");
+  }
+  else{
+   res.render("landing.ejs");
+  }
+
 });
 
 app.post("/signup", function (req, res) {
