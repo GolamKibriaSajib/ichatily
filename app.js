@@ -57,12 +57,7 @@ app.post("/signin", function (req, res) {
 
 
 app.get("/signup", function (req, res) {
-  if(req.session.username){
       res.render("signup.ejs");
-  }
-  else{
-   res.render("landing.ejs");
-  }
 
 });
 
