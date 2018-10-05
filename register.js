@@ -22,7 +22,7 @@ module.exports = function (irc, req, res) {
       client.say('NickServ', 'identify ' + req.session.username + " " + password);
       data = req.body.verify;
       client.say("NickServ", data)
-
+       req.session=null;
       res.render("success.ejs");
 
 
