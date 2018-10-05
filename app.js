@@ -18,7 +18,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "/")));
 var port = process.env.PORT || 3000;
 
-
 // app.use(extendTimeoutMiddleware);
 
 var socketIO = require("./simple3")(io, irc);
@@ -26,7 +25,7 @@ var socketIO = require("./simple3")(io, irc);
 
 app.get("/", function (req, res) {
   if (req.session.username) {
-    res.render("left.ejs", { username: req.session.username, password: req.session.password });
+    res.render("left.ejs", { username: req.session.username, password: req.session.password, channel: null });
   }
   else {
     res.render("landing.ejs");
@@ -48,9 +47,9 @@ app.get('/signin', function (req, res, next) {
 
 
 app.post("/signin", function (req, res) {
-  req.session.username = req.body.username;
+  req.session.username = req.body.name;
   req.session.password = req.body.password;
-  res.render("left.ejs", { username: req.body.name, password: req.body.password });
+  res.render("left.ejs", { username: req.body.name, password: req.body.password, channel: null });
 })
 
 
@@ -59,6 +58,8 @@ app.get("/signup", function (req, res) {
 });
 
 app.post("/signup", function (req, res) {
+  req.session.username = req.body.name;
+  req.session.password = req.body.password;
   require("./register")(irc, req, res);
 
 });
@@ -68,20 +69,20 @@ app.post("/verify", function (req, res) {
 });
 
 
-app.get("/:channel/:username/:password", function (req, res) {
+// app.get("/:channel/:username/:password", function (req, res) {
 
-  var password = new Buffer(req.params.password, 'base64')
-  var decode = password.toString();
-  if (req.session.username) {
+//   var password = new Buffer(req.params.password, 'base64')
+//   var decode = password.toString();
+//   if (req.session.username) {
 
-    res.render("left.ejs", { username: req.params.username, password: decode });
-  }
-  else {
-    res.render("signin.ejs");
-  }
+//     res.render("left.ejs", { username: req.params.username, password: decode });
+//   }
+//   else {
+//     res.render("signin.ejs");
+//   }
 
-  //    console.log(req.params.channel)
-})
+//   //    console.log(req.params.channel)
+// })
 
 app.get("/logout", function (req, res) {
 
@@ -102,6 +103,15 @@ app.get("/logout", function (req, res) {
     res.render("siginin.ejs");
   }
 
+})
+
+app.get("/:channel", function (req, res) {
+  if (req.session.username) {
+    res.render("left.ejs", { username: req.session.username, password: req.session.password, channel: req.params.channel });
+  }
+  else {
+    res.render("landing.ejs");
+  }
 })
 
 

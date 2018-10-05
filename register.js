@@ -1,22 +1,25 @@
 module.exports = function (irc, req, res) {
-  options = {};
+  var options = {};
+
   options = Object.assign(options, {
-    debug: true, showErrors: true, 
+    debug: true, showErrors: true,
   });
 
-  var client = new irc.Client("irc.freenode.net", req.body.name, options);
+  var client = new irc.Client("irc.freenode.net", req.session.username, options);
   var msg, data;
+
   client.once("registered", function () {
-    if (req.body.verify == null) { 
+    if (req.body.verify == null) {
       msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
       client.say('NickServ', msg);
       console.log("redirect");
-      res.redirect("./confirm.html");  
-    }
-    if (req.body.verify && req.body.password) {
+      res.render("confirm.ejs",{username:req.session.username,mail:req.body.email});
+      return client;
 
-      var password = req.body.password;
-      client.say('NickServ', 'identify ' + req.body.name + " " + password);
+    }
+    if (req.body.verify) {
+      var password = req.session.password;
+      client.say('NickServ', 'identify ' + req.session.username + " " + password);
       data = req.body.verify;
       client.say("NickServ", data)
 
@@ -33,8 +36,8 @@ module.exports = function (irc, req, res) {
 
   function OnError(message) {
 
-     msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
-      client.say('NickServ', msg);
+    msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
+    client.say('NickServ', msg);
 
     console.log("IRC Error:", message);
   }

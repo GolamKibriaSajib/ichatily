@@ -220,8 +220,8 @@
 	</style>
 	<script>
         
-				var socket = io("https://ichatily.cleverapps.io");
-          <!--  var socket = io("https://lobalhost:3000"); --!>
+			<!--	var socket = io("https://ichatily.cleverapps.io"); --!>
+            var socket = io("http://localhost:3000");
         
  		
             //this function can remove a array element.
@@ -452,9 +452,19 @@ socket.on("updatechannel",function(rooms,current_room,check){
  }
 
  });
-		
-			
+              var auth="<%=channel%>";
+		   console.log(auth);
+			if(auth==''){
 			socket.emit("every","<%=username%>","<%=password%>");
+            }
+            else{
+                socket.emit("every","<%=username%>","<%=password%>");
+                setTimeout(function(){
+          switchDirect();
+                },5000);
+               
+            }
+            
             socket.once("errormsg",function(msg){
                 $("#img").show();
                   $("#check").hide();
@@ -498,12 +508,18 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
 	});
 	
 	function switchRoom(){
-        console.log("kkk")
-        var encodedString = btoa("<%=password%>");
-      history.pushState(null, '', '/'+event.target.id+'/'+"<%=username%>"+'/'+encodedString);
-        socket.emit('switchRoom',"<%=username%>",event.target.id);
+        
+           history.pushState(null, '', '/'+event.target.id);
+
+        socket.emit('switchRoom',"<%=username%>",event.target.id); 
+	}
+
+
+    function switchDirect(){
+           socket.emit('switchRoom',"<%=username%>","<%=channel%>");
     
 	}
+		
 			
 			//**********************all socket.io code ***************************************		
 			

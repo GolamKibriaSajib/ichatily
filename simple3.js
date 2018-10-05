@@ -173,6 +173,14 @@ module.exports = function (io, chat) {
 						usernames.splice(i, 1);
 					   }
 			     	}
+                //   usernames = usernames.reduce((unique, o) => {
+                //    if(!unique.some(obj => obj.username === o.username)) {
+                //      unique.push(o);
+                //          }
+                //     return unique;
+                //     },[]);
+
+
 			
 				console.log(usernames)
 
