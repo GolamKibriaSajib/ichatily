@@ -516,11 +516,13 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
            history.pushState(null, '', '/'+event.target.id);
 
         socket.emit('switchRoom',"<%=username%>",event.target.id); 
+        $("#nameOfActiveChannel").text("#"+event.target.id);
 	}
 
 
     function switchDirect(){
            socket.emit('switchRoom',"<%=username%>","<%=channel%>");
+              $("#nameOfActiveChannel").text("#"+event.target.id);
     
 	}
 
@@ -565,7 +567,7 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
                        <img src="/2.png"/>
                     </div>
                     <div class="all">
-                        <span>#AllNightCafe</span>
+                        <span id="nameOfActiveChannel"></span>
                     </div>
                     <div class="pic">
                         <span class="glyphicon glyphicon-user"></span>
