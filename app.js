@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var app = express();
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var username;
+var password;
 //...
 var irc = require("irc");
 var server = require("http").createServer(app);
@@ -22,8 +24,6 @@ var port = process.env.PORT || 3000;
 
 // app.use(extendTimeoutMiddleware);
 
-var username;
-var password;
 
 var socketIO = require("./simple3")(io, irc);
 
@@ -54,8 +54,6 @@ app.get('/signin', function (req, res, next) {
 app.post("/signin", function (req, res) {
  require("./checkLogin")(irc,req,res);
 })
-
-
 app.get("/signup", function (req, res) {
       res.render("signup.ejs");
 
@@ -64,7 +62,7 @@ app.get("/signup", function (req, res) {
 app.post("/signup", function (req, res) {
   username = req.body.name;
  password = req.body.password;
-  require("./register")(irc, req, res,username,password);
+require("./register")(irc, req, res,username,password);
 
 });
 
@@ -72,21 +70,6 @@ app.post("/verify", function (req, res) {
   require("./register")(irc, req, res,username,password);
 });
 
-
-// app.get("/:channel/:username/:password", function (req, res) {
-
-//   var password = new Buffer(req.params.password, 'base64')
-//   var decode = password.toString();
-//   if (req.session.username) {
-
-//     res.render("left.ejs", { username: req.params.username, password: decode });
-//   }
-//   else {
-//     res.render("signin.ejs");
-//   }
-
-//   //    console.log(req.params.channel)
-// })
 
 app.get("/logout", function (req, res) {
 
