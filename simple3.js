@@ -62,7 +62,9 @@ module.exports = function (io, chat) {
 			var i=0;
             
 			bot.addListener('names',function(channel,nick){
-       
+               if(usernames.length>1){
+				usernames=[];
+			   }
 		         for (var name in nick) {
 			       i++;
          
@@ -112,6 +114,13 @@ module.exports = function (io, chat) {
 					socket.emit("data", from, text);
 				}
 			}
+
+		})
+
+		socket.on("changePassword",function(password){
+         var changeData='set password '+password+' ';
+	//	bot.say("NickServ", changeData);
+		bot.send("PRIVMSG","NickServ",changeData);
 
 		})
 

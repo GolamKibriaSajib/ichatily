@@ -9,9 +9,46 @@
     <link rel="stylesheet" href="style1.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/jquery-1.10.2.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
 	<style>
+
+    .pb-modalreglog-container
+    {
+        margin-top: 100px;
+    }
+
+    .pb-modalreglog-legend
+    {
+        text-align: center;
+    }
+
+    .pb-modalreglog-input-group
+    {
+        margin: auto;
+    }
+
+    .pb-modalreglog-submit
+    {
+        margin-left: 5px;
+    }
+
+    .pb-modalreglog-form-reg
+    {
+        text-align: center;
+    }
+
+    .pb-modalreglog-footer p
+    {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    #pb-modalreglog-progressbar
+    {
+        border-radius: 2px;
+    }
 	
 	 
             @media only screen and (max-width : 540px) 
@@ -221,6 +258,7 @@
 	<script>
         
 				var socket = io("https://ichatily.cleverapps.io");
+            
         
  		
             //this function can remove a array element.
@@ -405,6 +443,19 @@
             window.addEventListener("load", calculate_popups);
 			
 			$(function(){
+
+
+    
+<!--end modal !-->
+
+
+
+
+
+
+
+
+
                 var nameShorter="<%=username%>";
                 
 
@@ -509,6 +560,16 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
 
 	});
 	});
+
+    function changePassword(){
+        
+
+       var newPassword= $("#pws").val();
+       socket.emit("changePassword",newPassword);
+       setTimeout(function(){
+           alert("Yout password has been changed");
+       },2000);
+    }
 	
 	function switchRoom(){
         
@@ -601,7 +662,8 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
                 <div class="tools">
                     <section id="settings">
                         <i class="fas fa-cog" id="st"></i>
-                        <a href="#" title="Settings" id="sm">Settings</a>
+            
+                 <button class="btn btn-primary pb-modalreglog-submit" data-toggle="modal" data-target="#myModal">Setting</button>
                     </section>
                     <section id="power">
                         <i class="fas fa-power-off" id="st"></i>
@@ -640,6 +702,42 @@ $('#users').append('<div class="sidebar-name"><a href="javascript:register_popup
         </div>
     </div>
 
+<!-- modal div !-->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form onsubmit="return false;">
+                               <!-- <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <input type="email" class="form-control" id="email" placeholder="Email">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                    </div>
+                                </div> !-->
+                                <div class="form-group">
+                                    <label for="password">Your New Password</label>
+                                    <div class="input-group pb-modalreglog-input-group">
+                                        <input type="password" class="form-control" id="pws" placeholder="Password">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                           <button type="button" class="btn btn-primary" onclick="changePassword();">Saved</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- end modal div !-->
     <div class="clr"></div>
 
 </body>
