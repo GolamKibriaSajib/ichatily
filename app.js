@@ -4,9 +4,9 @@ var mongoose = require('mongoose');
 var app = express();
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var username;
-var password;
-//var securityKey;
+// var username;
+// var password;
+var securityKey;
 //...
 var irc = require("irc");
 var server = require("http").createServer(app);
@@ -53,32 +53,39 @@ app.get('/signin', function (req, res, next) {
 
 
 app.post("/signin", function (req, res) {
- require("./checkLogin")(irc,req,res);
+  require("./checkLogin")(irc, req, res);
 })
 app.get("/signup", function (req, res) {
-      res.render("signup.ejs");
+  res.render("signup.ejs");
 
 });
 
 app.post("/signup", function (req, res) {
   username = req.body.name;
- password = req.body.password;
- require("./register")(irc, req, res,username,password);
-//  var init=require("./signupProcess");
-//   var regi=init.register(irc, req, res,function(ircInformation){
-//   securityKey=ircInformation; 
-//   res.render("confirm.ejs", { username: req.body.name, mail: req.body.email });
-       
-        
-  
-//   })
+  password = req.body.password;
+
+  // require("./register")(irc, req, res,username,password);
+  var init = require("./signupProcess");
+  var regi = init.register(irc, req, res, function (ircInformation, counter) {
+    securityKey = ircInformation;
+    setTimeout(function () {
+      if (counter == 0) {
+        res.render("confirm.ejs", { username: req.body.name, mail: req.body.email });
+      }
+    }, 6000)
+
+
+
+
+
+  })
 
 });
 
 app.post("/verify", function (req, res) {
-  require("./register")(irc, req, res,username,password);
-//  var verifier=require("./signupProcess");
-//  var callBackVerifier=verifier.verify(securityKey,req,res);
+  //  require("./register")(irc, req, res,username,password);
+  var verifier = require("./signupProcess");
+  var callBackVerifier = verifier.verify(securityKey, req, res);
 });
 
 

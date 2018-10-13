@@ -13,22 +13,21 @@ module.exports = function (irc, req, res, username, password) {
       msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
       client.say('NickServ', msg);
       setTimeout(function () {
-        client.disconnect();
         if (counter == 0) {
           res.render("confirm.ejs", { username: req.body.name, mail: req.body.email });
         }
-      }, 5000);
+      }, 9000);
     }
 
     if (req.body.verify) {
-      client.say('NickServ', 'identify ' + username + " " + password);
+    client.say('NickServ', 'identify ' + username + " " + password);
       //  client.say('NickServ', 'identify '+password);
       verifymsg = req.body.verify;
       client.say("NickServ", verifymsg);
        setTimeout(function () {
       client.disconnect();
       res.render("success.ejs");
-    }, 6000);
+    }, 9000);
 
     }
   })

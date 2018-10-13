@@ -2,6 +2,7 @@ module.exports = {
 
   register: function (irc, req, res, cb) {
     var options = {};
+    var counter=0;
     options = Object.assign(options, {
       userName: req.body.name,
       password: req.body.password,
@@ -20,8 +21,7 @@ module.exports = {
       var checkMsg = message.args[1].indexOf(".");
       if (message.nick == 'NickServ') {
         if ((message.args[1].slice(0, checkMsg) == "This nickname is registered")) {
-          counter++;
-
+         counter++;
           res.render("errorNicks.ejs", { msg: message.args[1].slice(0, checkMsg) });
 
         }
@@ -30,7 +30,9 @@ module.exports = {
     client.once("registered", function () {
       msg = 'register ' + req.body.password + ' ' + req.body.email + ' ';
       client.say('NickServ', msg);
-      return cb(client);
+      setTimeout(function(){
+      return cb(client,counter);
+      },3000);
 
 
     })
