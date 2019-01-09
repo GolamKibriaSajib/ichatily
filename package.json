@@ -9,8 +9,8 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "express": "~4.14.0",
-	 "express-session":"1.15.6",
-	 "body-parser":"1.18.3",
+    "express-session": "1.15.6",
+    "body-parser": "1.18.3",
     "passport-http-bearer": "~1.0.1",
     "path": "~0.12.7",
     "http-server": "~0.9.0",
@@ -22,6 +22,3 @@
     "irc": "0.5.2"
   }
 }
-
-
-

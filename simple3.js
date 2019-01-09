@@ -228,7 +228,7 @@ module.exports = function (io, chat) {
 					io.sockets.in(room1).emit('updateusers', data1);
 				}
 				else{
-					console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+					
 					bot.join(socket.room);
 				}
 					

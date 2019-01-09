@@ -14,7 +14,7 @@ var counter=0;
 
   client.once("registered", function () {
       req.session.username = req.body.name;
- req.session.password = req.body.password;
+     req.session.password = req.body.password;
  client.disconnect();
  res.render("left.ejs", { username: req.body.name, password: req.body.password, channel: null });
   })

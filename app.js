@@ -65,6 +65,8 @@ app.post("/signup", function (req, res) {
   password = req.body.password;
 
   // require("./register")(irc, req, res,username,password);
+
+  if(username && password){
   var init = require("./signupProcess");
   var regi = init.register(irc, req, res, function (ircInformation, counter) {
     securityKey = ircInformation;
@@ -72,13 +74,12 @@ app.post("/signup", function (req, res) {
       if (counter == 0) {
         res.render("confirm.ejs", { username: req.body.name, mail: req.body.email });
       }
-    }, 6000)
-
-
-
-
-
-  })
+    }, 6000);
+  });
+}
+else{
+  res.render("error.ejs");
+}
 
 });
 
